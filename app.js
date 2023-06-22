@@ -25,7 +25,6 @@ function printallitems(arr){
 async function getPorducts() {
     const productsResponse = await fetch('https://dummyjson.com/products')
         .then(res => res.json())
-
     let products = productsResponse.products
    printallitems(products)
     //map
@@ -38,32 +37,28 @@ async function getPorducts() {
     
     categories.forEach((cat) => {
         const chip = `<div class = 'chip' id = 'chip' > <span > ${cat}</span> </div>`
-        tags.innerHTML += chip
-    
-        const chipElements = document.getElementsByClassName('chip');
-        Array.from(chipElements).forEach((chipElement) => {
-          chipElement.addEventListener('click', function (event) {
-            const spanHTML = event.currentTarget.querySelector('span').innerHTML;
-     console.log(spanHTML);
-
-        let desiredProducts=products.filter(each=> (spanHTML.trim().toLowerCase()==='All'.trim().toLowerCase()) ?   products :each.category.trim().toLowerCase() === spanHTML.trim().toLowerCase())
-        console.log(desiredProducts);
-        
-        printallitems(desiredProducts)
-        
-        
-        })})
-        
-         
+        tags.innerHTML += chip     
     })
+    
+    const chipElements = document.getElementsByClassName('chip');
+    Array.from(chipElements).forEach((chipElement) => {
+      chipElement.addEventListener('click', function (event) {
+        const spanHTML = event.currentTarget.querySelector('span').innerHTML;
+
+    let desiredProducts=products.filter(each=> (spanHTML.trim().toLowerCase()==='All'.trim().toLowerCase()) ?   products :each.category.trim().toLowerCase() === spanHTML.trim().toLowerCase())
+
+    printallitems(desiredProducts)
+    
+    
+    })})
 
     // filter
-    const smartphones = products.filter((data) => data.category == 'laptops')
-    console.log('smartphones->', smartphones)
+    // const smartphones = products.filter((data) => data.category == 'laptops')
+    // console.log('smartphones->', smartphones)
 
-    //find
-    const iphone = products.find((data) => data.title == 'iPhone X')
-    console.log('iphone->', iphone)
+    // //find
+    // const iphone = products.find((data) => data.title == 'iPhone X')
+    // console.log('iphone->', iphone)
 
 }
 
